@@ -1,9 +1,32 @@
+# version: "3"
+
+# services:
+#   blog:
+#     build: .
+#     container_name: kufaii-blog
+#     ports:
+#       - "4321:4321"
+#     restart: unless-stopped
+
 version: "3"
 
 services:
   blog:
     build: .
     container_name: kufaii-blog
+    # internal exposure only
+    expose:
+      - "4321"
+    restart: unless-stopped
+
+  nginx:
+    image: nginx:alpine
+    container_name: nginx-proxy-kufaii
     ports:
-      - "4321:4321"
+      - "8090:80"
+      # - "443:443"  # uncomment if you set up ssl later
+    volumes:
+      - ./nginx/conf.d:/etc/nginx/conf.d
+    depends_on:
+      - blog
     restart: unless-stopped
