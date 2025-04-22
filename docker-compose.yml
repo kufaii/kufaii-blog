@@ -1,13 +1,3 @@
-# version: "3"
-
-# services:
-#   blog:
-#     build: .
-#     container_name: kufaii-blog
-#     ports:
-#       - "4321:4321"
-#     restart: unless-stopped
-
 version: "3"
 
 services:
