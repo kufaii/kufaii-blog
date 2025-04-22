@@ -1,0 +1,23 @@
+---
+// Import your components
+import Header from "../components/Header.astro";
+// Other imports
+---
+
+<html lang="en">
+  <head>
+    <!-- head content -->
+  </head>
+  <body>
+    <!-- Add this div for the grid background -->
+    <div class="debug-grid"></div>
+
+    <Header />
+
+    <main>
+      <slot />
+    </main>
+
+    <!-- Footer and other page elements -->
+  </body>
+</html>

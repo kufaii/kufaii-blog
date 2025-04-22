@@ -1,0 +1,156 @@
+---
+import HeaderLink from "./HeaderLink.astro";
+import { SITE_TITLE, NAME } from "../consts";
+---
+
+<header>
+  <table class="header">
+    <thead>
+      <tr>
+        <td colspan="4" rowspan="2" class="width-auto">
+          <div class="header-content">
+            <h1 class="title">
+              <span class="title-wrapper">
+                <a
+                  href="/"
+                  style="color: #baf9fb; display: inline-block; margin-right: 0;"
+                  >{SITE_TITLE}</a
+                ><span
+                  style="color: #baf9fba8; font-size: 0.6em; display: inline-block; margin-left: 0;"
+                  >({NAME})</span
+                >
+              </span>
+            </h1>
+            <div class="subtitle-row">
+              <span class="subtitle">Web Developer // Front-end | Back-end</span
+              >
+              <span class="grid-toggle">
+                <input type="checkbox" id="grid-toggle" />
+                <label for="grid-toggle">Grid</label>
+              </span>
+            </div>
+          </div>
+        </td>
+      </tr>
+      <tr> </tr>
+      <tbody>
+        <th>
+          <HeaderLink href="/">Home</HeaderLink>
+        </th>
+        <!-- <th>
+          <HeaderLink href="/blog">Blog</HeaderLink>
+        </th> -->
+        <th>
+          <HeaderLink href="/about">About</HeaderLink>
+        </th>
+      </tbody>
+      <tbody> </tbody>
+    </thead>
+    <style>
+      table,
+      th,
+      td {
+        border: solid #57a0da; /* green border */
+      }
+      .header {
+        margin-bottom: calc(var(--line-height) * 2);
+      }
+
+      .header h1 {
+        margin: 0;
+        line-height: 1;
+      }
+
+      .header a {
+        text-decoration: none;
+      }
+
+      .header-content {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .subtitle {
+        color: #de6359;
+        margin-top: 0;
+      }
+
+      .grid-toggle {
+        float: right;
+        display: inline-flex;
+        align-items: center;
+        margin-left: 2ch;
+        margin-top: 0;
+      }
+
+      .grid-toggle input[type="checkbox"] {
+        margin-right: 0.5ch;
+        margin-top: 0;
+      }
+
+      .subtitle-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: nowrap;
+        margin-top: 0;
+      }
+
+      .grid-toggle {
+        display: inline-flex;
+        align-items: center;
+        white-space: nowrap;
+        flex-shrink: 0;
+        margin-left: 1ch;
+        margin-top: 0;
+      }
+
+      .grid-toggle input[type="checkbox"] {
+        margin-right: 0.5ch;
+        margin-top: 0;
+      }
+    </style>
+  </table>
+
+  <script>
+    // Script to toggle the grid
+    document.addEventListener("DOMContentLoaded", () => {
+      try {
+        const gridToggle = document.getElementById(
+          "grid-toggle",
+        ) as HTMLInputElement;
+
+        // Safety check to prevent null reference
+        if (!gridToggle) {
+          console.error("Grid toggle element not found");
+          return;
+        }
+
+        // Check if there's a stored preference
+        const savedGridPreference = localStorage.getItem("showGrid");
+        if (savedGridPreference === "true") {
+          document.body.classList.add("show-grid");
+          document.body.classList.add("debug");
+          gridToggle.checked = true;
+        }
+
+        // Toggle the grid when checkbox is clicked
+        gridToggle.addEventListener("change", () => {
+          if (gridToggle.checked) {
+            document.body.classList.add("show-grid");
+            document.body.classList.add("debug");
+            localStorage.setItem("showGrid", "true");
+          } else {
+            document.body.classList.remove("show-grid");
+            document.body.classList.remove("debug");
+            localStorage.setItem("showGrid", "false");
+          }
+        });
+
+        console.log("Grid toggle initialized successfully");
+      } catch (error) {
+        console.error("Error initializing grid toggle:", error);
+      }
+    });
+  </script>
+</header>
